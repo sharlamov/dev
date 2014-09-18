@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net</groupId>
-	<artifactId>HomeBank</artifactId>
+	<artifactId>Store</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>HomeBank Maven Webapp</name>
+	<name>Store Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>

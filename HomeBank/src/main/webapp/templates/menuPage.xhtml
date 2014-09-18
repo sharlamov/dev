@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+	<div class="logo_line">
+		Game club ${gameController.loggedUser.username}
+		<p:commandButton type="button" value="Logout" icon="ui-icon-extlink"
+			action="#{loginController.logout}" />
+	</div>
+
+
+	<div id="centeredmenu">
+		<ul>
+			<li><p:commandLink>
+					<h:graphicImage library="images" name="lists_3129.png" /> Lists
+    		</p:commandLink>
+				<ul>
+					<li><p:commandLink action="personPage.xhtml?faces-redirect=true" value="Users"/></li>
+				</ul></li>
+			<li><a href="#"> <h:graphicImage library="images"
+						name="lists_3129.png" /> Documents
+			</a>
+				<ul>
+					<li><a href="#">Link one</a></li>
+					<li><a href="#">Link two</a></li>
+					<li><a href="#">Link three</a></li>
+					<li><a href="#">Link four</a></li>
+					<li><a href="#">Link five is a long link that wraps</a></li>
+				</ul></li>
+			<li><a href="#"> <h:graphicImage library="images"
+						name="lists_3129.png" /> Reports
+			</a>
+				<ul>
+					<li><a href="#">Link one</a></li>
+					<li><a href="#">Link two</a></li>
+					<li><a href="#">Link three</a></li>
+					<li><a href="#">Link four</a></li>
+					<li><a href="#">Link five</a></li>
+				</ul></li>
+
+		</ul>
+	</div>
+
+<!-- 	<p:menubar> -->
+<!-- 		<p:submenu label="Lists" rendered="#{gameController.adminUser}" -->
+<!-- 			icon="ui-icon-document"> -->
+<!-- 			<p:menuitem value="Users" -->
+<!-- 				action="personPage.xhtml?faces-redirect=true" icon="ui-icon-person" /> -->
+<!-- 		</p:submenu> -->
+<!-- 		<p:submenu label="Documents"> -->
+<!-- 			<p:menuitem value="Inputs" -->
+<!-- 				action="dataPage.xhtml?faces-redirect=true" icon="ui-icon-document" /> -->
+<!-- 		</p:submenu> -->
+<!-- 		<p:submenu label="Reports" rendered="#{gameController.adminUser}"> -->
+<!-- 			<p:menuitem value="Income by device" -->
+<!-- 				action="reportPage.xhtml?faces-redirect=true" icon="ui-icon-pencil" /> -->
+<!-- 		</p:submenu> -->
+
+<!-- 		<f:facet name="options"> -->
+
+
+<!-- 		</f:facet> -->
+<!-- 	</p:menubar> -->
+
+
+
+
+</ui:composition>

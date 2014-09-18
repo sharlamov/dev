@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:panelGroup id="inputDataForm">
+		<h:form id="headerForm" autocomplete="off">
+			<div class="logo_line">
+				Game club ${gameController.loggedUser.username}
+				<p:commandButton type="button" value="Logout" icon="ui-icon-extlink"
+					action="#{loginController.logout}" />
+			</div>
+
+
+			<p:menubar>
+				<p:submenu label="Lists" icon="ui-icon-document">
+					<p:menuitem value="Users" url="#" />
+				</p:submenu>
+
+				<p:submenu label="Documents" icon="ui-icon-pencil">
+					<p:menuitem value="Doc1" url="#"
+						icon="ui-icon-arrowreturnthick-1-w" />
+				</p:submenu>
+
+				<p:submenu label="Reports" icon="ui-icon-help">
+					<p:menuitem value="Statistics" url="#" />
+				</p:submenu>
+			</p:menubar>
+
+		</h:form>
+	</h:panelGroup>
+</ui:composition>
+

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+	<h:outputStylesheet library="css" name="xstyle.css" />
+	<title>Store</title>
+</h:head>
+<h:body>
+	<f:event type="preRenderView" listener="#{reportController.init}" />
+	<ui:param name="useInfoBar" value="true" />
+
+
+	<h:form id="dataPageForm" autocomplete="off">
+		<ui:include src="templates/menuPage.xhtml" />
+
+			<h:panelGroup id="reportForm" 
+				rendered="#{reportController.adminUser}">
+			<div class="left_part">
+				<h:panelGroup id="incomeFilterForm">
+
+					<p:panelGrid border="1" class="cenered_part table_text">
+						<f:facet name="header">
+							<p:row>
+								<p:column colspan="2">Filter incomes report:</p:column>
+							</p:row>
+						</f:facet>
+
+						<p:row>
+							<p:column>Custom period: </p:column>
+							<p:column>
+								<p:calendar value="#{reportController.incomeDate1}"
+									pattern="dd.MM.yyyy" readonlyInput="true">
+									<f:convertDateTime pattern="dd.MM.yyyy" />
+								</p:calendar>
+								<p:calendar value="#{reportController.incomeDate2}"
+									pattern="dd.MM.yyyy" readonlyInput="true">
+									<f:convertDateTime pattern="dd.MM.yyyy" />
+								</p:calendar>
+							</p:column>
+						</p:row>
+
+						<p:row>
+							<p:column>User: </p:column>
+							<p:column>
+								<p:selectOneMenu value="#{reportController.filterUser}"
+									converter="#{userConverter}">
+									<f:selectItem itemLabel="All" itemValue="" />
+									<f:selectItems value="#{reportController.userList}" var="item"
+										itemLabel="#{item.username}" itemValue="#{item}" />
+								</p:selectOneMenu>
+							</p:column>
+						</p:row>
+
+						<p:row>
+							<p:column>Equipment: </p:column>
+							<p:column>
+								<p:selectOneMenu value="#{reportController.filterEquip}"
+									converter="#{enumConverter}">
+									<f:selectItem itemLabel="All" itemValue="" />
+									<f:selectItems value="#{reportController.equipments}"
+										var="equip" itemLabel="#{equip}" itemValue="#{equip}" />
+								</p:selectOneMenu>
+							</p:column>
+						</p:row>
+
+						<f:facet name="footer">
+							<p:row>
+								<p:column colspan="2">
+									<p:commandButton value="Generate" immediate="false"
+										actionListener="#{reportController.getIncomeReportList()}"
+										ajax="true" update="reportForm" process="incomeFilterForm" />
+								</p:column>>
+						</p:row>
+						</f:facet>
+					</p:panelGrid>
+
+				</h:panelGroup>
+		</div>
+
+		<div class="right_part">
+			<h:panelGroup id="incomeReportForm" class="table_text">
+				<p:dataTable var="bet" value="#{reportController.incomeReport}">
+					<p:column headerText="Equipment">
+						<h:outputText value="#{bet[0]}" />
+					</p:column>
+					<p:column headerText="In Suma" style="text-align:center">
+						<h:outputText value="#{bet[1]}" />
+					</p:column>
+					<p:column headerText="Out Suma" style="text-align:center">
+						<h:outputText value="#{bet[2]}" />
+					</p:column>
+					<p:column headerText="Income" style="text-align:center">
+						<h:outputText value="#{bet[3]}" />
+					</p:column>
+					<p:columnGroup type="footer">
+						<p:row>
+							<p:column colspan="1" style="text-align:right"
+								footerText="Totals:" />
+							<p:column
+								footerText="#{reportController.getSumByCol(reportController.incomeReport,1)}" />
+							<p:column
+								footerText="#{reportController.getSumByCol(reportController.incomeReport,2)}" />
+							<p:column
+								footerText="#{reportController.getSumByCol(reportController.incomeReport,3)}" />
+						</p:row>
+					</p:columnGroup>
+				</p:dataTable>
+			</h:panelGroup>
+			</div>
+		</h:panelGroup>
+		
+
+	</h:form>
+
+
+
+</h:body>
+</html>

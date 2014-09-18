@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+	<h:outputStylesheet library="css" name="xstyle.css" />
+	<title>HomeBank</title>
+</h:head>
+<h:body>
+	<f:event type="preRenderView" listener="#{listController.init}" />
+	<ui:param name="useInfoBar" value="true" />
+	
+	<h:form id="dataPageForm"  autocomplete="off">
+		<ui:include src="templates/menuPage.xhtml"/>
+		
+		<h:panelGroup id="userForm" class="table_text" rendered="#{listController.adminUser}">
+
+			<p:dataTable id="userId" var="user"
+				value="#{listController.userList}" editable="true"
+				style="margin-bottom:20px">
+				<f:facet name="header">
+           			List of users
+       			</f:facet>
+
+				<p:ajax event="rowEdit" listener="#{listController.onRowEdit}" />
+
+				<p:column headerText="Login">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{user.username}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText id="usernameInput" value="#{user.username}"
+								style="width:100%" />
+						</f:facet>
+					</p:cellEditor>
+					<f:facet name="footer">
+						<p:inputText value="#{listController.newUser.username}"
+							style="width:100%" />
+					</f:facet>
+				</p:column>
+
+				<p:column headerText="Password">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{user.password}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{user.password}" style="width:100%" />
+						</f:facet>
+					</p:cellEditor>
+					<f:facet name="footer">
+						<p:inputText value="#{listController.newUser.password}"
+							style="width:100%" />
+					</f:facet>
+				</p:column>
+
+				<p:column headerText="Role">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{user.role}" />
+						</f:facet>
+						<f:facet name="input">
+							<h:selectOneMenu value="#{user.role}" style="width:100%">
+								<f:selectItems value="#{listController.roleTypes}" var="man"
+									itemLabel="#{man}" itemValue="#{man}" />
+							</h:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+					<f:facet name="footer">
+							<h:selectOneMenu value="#{listController.newUser.role}" style="width:100%">
+								<f:selectItems value="#{listController.roleTypes}" var="man"
+									itemLabel="#{man}" itemValue="#{man}" />
+							</h:selectOneMenu>
+					</f:facet>
+				</p:column>
+
+				<p:column style="width:30px;">
+					<p:rowEditor/>
+				</p:column>
+
+				<p:column style="width:30px;">
+					<p:commandButton actionListener="#{listController.deleteUser(user.id)}" 
+						icon="ui-icon-close" update="userId" process="userId"/>
+					<f:facet name="footer">
+						<p:commandButton style="float:left;" actionListener="#{listController.saveNewUser}" 
+						icon="ui-icon-plus" update="userId" process="userId"/>
+					</f:facet>
+				</p:column>
+
+			</p:dataTable>
+
+		</h:panelGroup>
+
+	
+	</h:form>
+	
+	
+	
+</h:body>
+</html>
